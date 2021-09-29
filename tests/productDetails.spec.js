@@ -29,7 +29,10 @@ const productDetails = require("../src/productDetails");
 describe("6 - Implemente os casos de teste para a função `productDetails`", () => {
   it("Verifica se a função `productDetails` tem o comportamento esperado", () => {
     const arrayReturned = productDetails("Alcool gel", "Máscara");
-
+    let finalString = '';
+    for (let index = 0; index < arrayReturned.length; index += 1) {
+       finalString = arrayReturned[index].details.productId.replace(/\D/g, '');
+    }
     // ESCREVA SEUS TESTES ABAIXO:
     // Teste se productDetails é uma função.
     expect(typeof productDetails).toBe("function");
@@ -45,5 +48,6 @@ describe("6 - Implemente os casos de teste para a função `productDetails`", ()
         { name: "Esparadrapo", details: { productId: "Esparadrapo123" } },
       ]);
     // Teste se os dois productIds terminam com 123.
+      expect(finalString).toBe('123');
   });
 });
