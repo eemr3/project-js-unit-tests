@@ -79,9 +79,60 @@
 // que percorre por todos os itens de `objetoRetornado.consumption`, soma o preço deles e retorna o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
 
+const menu = {
+  food: { coxinha: 3.9, sanduiche: 9.9, sashimi: 10.9 },
+  drinks: { agua: 3.9, cerveja: 6.9 },
+};
+
 const createMenu = (objParam) => ({
   fetchMenu: () => objParam,
   consumption: [],
-});
+}); 
+const myRestaurant = createMenu(menu);
 
-module.exports = createMenu;
+const orderFromMenu = (obj, orderParam) => {
+  obj.consumption.push(orderParam);
+  return obj;
+};
+
+let restaurant = {
+  menu: myRestaurant.fetchMenu(),
+  consumption: [],
+  order: (string) => orderFromMenu(restaurant, string),
+};
+
+function getFood(food) {
+  let value = 0;
+  for (let index = 0; index < Object.entries(restaurant.menu.food).length; index += 1) {
+    if (Object.entries(restaurant.menu.food)[index][0] === food) {
+      value += Object.entries(restaurant.menu.food)[index][1];
+    }    
+  }
+
+  return value;
+}
+
+function getDrink(drink) {
+    let value = 0;
+    for (
+      let index = 0; index < Object.entries(restaurant.menu.drinks).length; index += 1) {
+      if (Object.entries(restaurant.menu.drinks)[index][0] === drink) {
+        value += Object.entries(restaurant.menu.food)[index][1];
+      }
+    }
+
+    return value;
+}
+
+function setPay(obj) {
+  let value = 0;
+  for (let index = 0; index < Object.entries(obj).length; index += 1) {
+    let consumption = obj[index];
+    value += getFood(consumption);
+    value += getDrink(consumption);
+  }
+  
+  return parseFloat(value.toFixed(2));
+}
+
+module.exports = { createMenu, restaurant, setPay };
