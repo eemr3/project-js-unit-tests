@@ -142,7 +142,7 @@ describe('10 - Implemente os casos de teste e a função `createMenu`', () => {
 
     const result = objetoRetornado2.consumption // Retorno: somaDosPreçosDosPedidos
     
-    expect(setPay(result)).toBe(22.6);
+    expect(setPay(result)).toBeCloseTo(24.86);
     
     // Agora faça o PASSO 4 no arquivo `src/restaurant.js`.
   });

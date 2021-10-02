@@ -120,7 +120,7 @@ function getDrink(drink) {
         value += Object.entries(restaurant.menu.food)[index][1];
       }
     }
-
+    
     return value;
 }
 
@@ -131,7 +131,7 @@ function setPay(obj) {
     value += getFood(consumption);
     value += getDrink(consumption);
   }
-  
+  value += (value / 100) * 10;
   return parseFloat(value.toFixed(2));
 }
 
